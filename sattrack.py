@@ -29,7 +29,7 @@ def read_TLE(TLEFILE):
         line2 = fp.readline().strip('\n')
     return name, line1, line2
 
-def create_kml(tle, startdate, enddate):
+def create_kml(tlefile, startdate, enddate):
     '''
     Creates a KML file with coordinates computed 10 minute intervals
     from startdate to enddate.
@@ -42,6 +42,10 @@ def create_kml(tle, startdate, enddate):
     Return:
         kml_file, str
     '''
+
+    # Read and parse TLE file
+    name, line1, line2 = read_TLE(tlefile)
+    tle = ephem.readtle(name, line1, line2);
 
     # Aarhus coordinates
     Aarhus = ephem.Observer()
@@ -76,13 +80,13 @@ def create_kml(tle, startdate, enddate):
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-    <name>Delphini-1 Orbit</name>
+    <name>Orbit</name>
     <snippet>Created by Anders Bo Justesen, Aarhus University</snippet>
     <Style id="multiTrack_n">
         <IconStyle>
             <Icon>
-                <scale>1.25</scale>
-                <href>http://users-phys.au.dk/ajust/gomspace_nanoeye.png</href>
+                <scale>1.5</scale>
+                <href>webmapview/gomspace_nanoeye_thumb.png</href>
             </Icon>
         </IconStyle>
         <LineStyle>
