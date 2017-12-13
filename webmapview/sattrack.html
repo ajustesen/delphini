@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delphini-1</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Set size of map */
+      #map {
+        height: 100%;
+      }
+      /* Fill the browser window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      /* This function loads variables contained in the script url */
+      function getScript(url, callback) {
+         var script = document.createElement('script');
+         script.type = 'text/javascript';
+         script.src = url;
+
+         script.onreadystatechange = callback;
+         script.onload = callback;
+
+         document.getElementsByTagName('head')[0].appendChild(script);
+      }
+
+      /* Initialize the map */
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 56.162939, lng: 10.203921},
+          zoom: 2
+      });
+
+      /* Load layer from URL. This layer may contain anything you can think of! */
+      new google.maps.KmlLayer({
+          map: map,
+          url: 'https://www.google.com/maps/d/kml?mid=1ZNi33k1kbx-w1l9Gb_Wo-_L8ZtRhhUGl'
+        });
+
+      /* Function to update marker position */
+      function changeMarkerPosition(marker, lat, lng) {
+          var latlng = new google.maps.LatLng(lat, lng);
+          marker.setPosition(latlng);
+      }
+
+      /* Create the satellite marker */
+      var image = 'gomspace_nanoeye_thumb.png'
+      var satMarker = new google.maps.Marker({
+        map: map,
+        icon: image
+      });
+
+      /* This is a recursive function that:
+          - Waits for 500 ms
+          - Loads lat and lng from coord.js
+          - Changes the marker position
+          - Calls itself
+      */
+      function updateMarkerLoop(){
+        getScript('coord.js', function(){
+          setTimeout(function () {
+            changeMarkerPosition(satMarker, lat, lng);
+            updateMarkerLoop();
+          }, 500)
+        });
+      }
+
+      /* By calling the recursive function we create an infinite loop */
+      updateMarkerLoop();
+      }
+    </script>
+
+    <!-- This is a link to my personal Google Maps Javascript API key. Please don't abuse it! -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_Zyx3rZXT_cSC83ocnWvE0iKmTMKXCFA&callback=initMap">
+    </script>
+  </body>
+</html>

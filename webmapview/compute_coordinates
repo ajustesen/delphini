@@ -1,0 +1,78 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 12 15:19:31 2017
+
+@author: anders
+"""
+
+from __future__ import print_function, with_statement, division
+import sys
+sys.path.append('../')
+import sattrack
+import argparse
+import os
+import numpy as np
+import ephem
+import datetime
+import time
+
+
+def compute_coordinates(tlefile):
+    '''
+    Compute current coordinates in infinite loop.
+    Saves latest coordinates to coord.js (in current directory)
+
+    Input:
+        TLEfile, str
+    Return:
+        None
+    '''
+    name, line1, line2 = sattrack.read_TLE(tlefile)
+    tle = ephem.readtle(name, line1, line2);
+
+    outputfile = 'coord.js'
+
+    # Compute coordinates and save to file in infinite loop
+    try:
+        while True:
+            tle.compute(datetime.datetime.utcnow())
+
+            lat_deg = np.degrees(tle.sublat)
+            lon_deg = np.degrees(tle.sublong)
+
+            coordstr = 'var lat = ' + str(lat_deg) + ';\n'
+            coordstr += 'var lng = ' + str(lon_deg) + ';\n'
+            print(lat_deg, lon_deg)
+            with open(outputfile, 'w') as fp:
+                fp.write(coordstr)
+            time.sleep(250./1000.)
+    except KeyboardInterrupt:
+            pass
+    finally:
+        os.remove(outputfile)
+    return
+
+def main():
+    '''
+    Parse input arguments
+    '''
+    # Define helptext
+    helptext = 'Continuously compute coordinates and save to file. ' +\
+               'This script must be active when using sattrack.html'
+
+    # Setup argument parser
+    parser = argparse.ArgumentParser(description=helptext)
+
+    # Add positional argument (name of inputfile)
+    parser.add_argument('inputfile', help='Path to TLE file')
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    # Compute the coordinates
+    compute_coordinates(vars(args)['inputfile'])
+
+if __name__ == '__main__':
+    main()
+

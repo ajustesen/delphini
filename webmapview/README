@@ -1,0 +1,2 @@
+To display an continuously updated view of the satelitte on an interactive google maps,
+make sure that compute_coordinates is running and launch sattrack.html in a browser. Enjoy!
