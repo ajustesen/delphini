@@ -31,7 +31,7 @@ def read_TLE(TLEFILE):
 
 def create_kml(tlefile, startdate, enddate):
     '''
-    Creates a KML file with coordinates computed 10 minute intervals
+    Create a KML file with coordinates computed at 10 minute intervals
     from startdate to enddate.
 
     Input:
@@ -55,8 +55,6 @@ def create_kml(tlefile, startdate, enddate):
     # Compute coordinates
     ten_min = datetime.timedelta(minutes=1)
     indent = '                '
-    when = ''
-    where = ''
     whenwhere = ''
     date = startdate - ten_min
     while date < enddate:
@@ -71,8 +69,6 @@ def create_kml(tlefile, startdate, enddate):
         datestr = '<when>' + str(date.year) + '-' + str(date.month).zfill(2) + '-' + str(date.day).zfill(2) + 'T' +\
                   str(date.hour).zfill(2) + ':' + str(date.minute).zfill(2) + ':' + str(date.second).zfill(2) + 'Z</when>\n'
         coordstr = '<gx:coord>' + str(lon_deg) + ' ' + str(lat_deg) + ' ' + str(elev) + '</gx:coord>\n'
-        when += datestr
-        where += coordstr
         whenwhere += indent + datestr + indent + coordstr
 
     kml_file =\
@@ -86,7 +82,7 @@ def create_kml(tlefile, startdate, enddate):
         <IconStyle>
             <Icon>
                 <scale>1.5</scale>
-                <href>webmapview/gomspace_nanoeye_thumb.png</href>
+                <href>misc/gomspace_nanoeye_thumb.png</href>
             </Icon>
         </IconStyle>
         <LineStyle>
