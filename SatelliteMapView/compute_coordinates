@@ -1,10 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 12 15:19:31 2017
-
-@author: anders
-"""
 
 from __future__ import print_function, with_statement, division
 import sys
@@ -18,23 +13,28 @@ import datetime
 import time
 
 
-def compute_coordinates(tlefile):
+def compute_coordinates(tlefile, verbose=False):
     '''
     Compute current coordinates in infinite loop.
-    Saves latest coordinates to coord.js (in current directory)
+    Save latest coordinates to coord.js (in current directory)
 
     Input:
-        TLEfile, str
+        TLEfile, path to TLE file, str
+        verbose, flag for outputting coordinates, bool
     Return:
         None
     '''
     name, line1, line2 = sattrack.read_TLE(tlefile)
-    tle = ephem.readtle(name, line1, line2);
+    tle = ephem.readtle(name, line1, line2)
 
     outputfile = 'coord.js'
+    sleeptime = 250 / 1000.
 
     # Compute coordinates and save to file in infinite loop
     try:
+        print('\nComputing coordinates using ' + tlefile)
+        print('Saving coordinates to ' + outputfile)
+        print('\nUpdating coordinates every ' + str(sleeptime * 1000.) + ' ms...')
         while True:
             tle.compute(datetime.datetime.utcnow())
 
@@ -43,15 +43,17 @@ def compute_coordinates(tlefile):
 
             coordstr = 'var lat = ' + str(lat_deg) + ';\n'
             coordstr += 'var lng = ' + str(lon_deg) + ';\n'
-            print(lat_deg, lon_deg)
+            if verbose:
+                print(lat_deg, lon_deg)
             with open(outputfile, 'w') as fp:
                 fp.write(coordstr)
-            time.sleep(250./1000.)
+            time.sleep(sleeptime)
     except KeyboardInterrupt:
-            pass
+        pass
     finally:
         os.remove(outputfile)
     return
+
 
 def main():
     '''
@@ -67,12 +69,18 @@ def main():
     # Add positional argument (name of inputfile)
     parser.add_argument('inputfile', help='Path to TLE file')
 
+    # Add optional argument (verbose output flag)
+    parser.add_argument('--verbose', action='store_true',
+                        help='Print coordinates to stdout')
+
     # Parse the arguments
     args = parser.parse_args()
 
     # Compute the coordinates
-    compute_coordinates(vars(args)['inputfile'])
+    compute_coordinates(vars(args)['inputfile'], verbose=vars(args)['verbose'])
+
+    return
+
 
 if __name__ == '__main__':
     main()
-

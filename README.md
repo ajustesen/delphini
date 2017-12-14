@@ -16,24 +16,24 @@ Download and install [Google Earth Pro](https://earth.google.com/download-earth.
 
 Under `Tools -> Options -> Touring`, use the following settings:
 
-![Google Earth settings](http://users-phys.au.dk/ajust/GoogleEarthSettings.png)
+![Google Earth settings](misc/GoogleEarthSettings.png)
 
 Create a KML file using the Python script `create_KML_file.py` (instructions inside) and open it with Google Earth.
 
 Make sure that Google Earth is set to UTC time in the `Date and Time Options` by clicking here:
 
-![Data and Time](http://users-phys.au.dk/ajust/DateandTime.png)
+![Data and Time](misc/DateandTime.png)
 
 
 
 To start the SEV, press the `Play Tour` button highlighted below:
 
-![Play Tour](http://users-phys.au.dk/ajust/PlayTour.png)
+![Play Tour](misc/PlayTour.png)
 
 
 The SEV should look something like this (with the sidebar and tool bar hidden):
 
-![Playing tour](http://users-phys.au.dk/ajust/Playing.png)
+![Playing tour](misc/Playing.png)
 
 The SEV will start playing from the `startdate` specified in the KML file. To sync the SEV to a realtime view, simply navigate to the current date and time. 
 
