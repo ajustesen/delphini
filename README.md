@@ -1,4 +1,4 @@
-## Delphini-1 Project
+# Delphini-1 Project
 
 This repository contains routines written by Anders Bo Justesen for the Delphini-1 Workshop 2 exam project. The repository contains files for two applications, the **Satellite Earth View** (SEV) and the **Satellite Map View** (SMP).
 
@@ -10,7 +10,7 @@ Both applications are based on orbital computations made with Python from the tw
 
 ----------
 
-###Instructions for Satellite Earth View
+## Instructions for Satellite Earth View
 
 Download and install [Google Earth Pro](https://earth.google.com/download-earth.html).
 
@@ -41,7 +41,7 @@ It is possible to enable a daily updated cloud map, which will display accurate 
 
 ----------
 
-### Instructions for Satellite Map View
+## Instructions for Satellite Map View
 
 Make sure that `compute_coordinates` has execute permission.
 
