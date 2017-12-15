@@ -37,14 +37,16 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 56.162939, lng: 10.203921},
-          zoom: 2
+          zoom: 1
       });
 
-      /* Load layer from URL. This layer may contain anything you can think of! */
+      /* Load KML layer from URL or local path */
       new google.maps.KmlLayer({
           map: map,
-          url: 'https://www.google.com/maps/d/kml?mid=1ZNi33k1kbx-w1l9Gb_Wo-_L8ZtRhhUGl'
+          url: 'https://www.google.com/maps/d/kml?mid=1919HD6uTNVHiKjLJFXtOXJqB00cuDFEe',
+          preserveViewport: true
         });
+      
 
       /* Function to update marker position */
       function changeMarkerPosition(marker, lat, lng) {
@@ -53,7 +55,12 @@
       }
 
       /* Create the satellite marker */
-      var image = '../misc/gomspace_nanoeye_thumb.png'
+      var image = {
+        url: '../misc/gomspace_nanoeye_thumb.png',
+        size: new google.maps.Size(50, 50),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(25, 25)
+      };
       var satMarker = new google.maps.Marker({
         map: map,
         icon: image
