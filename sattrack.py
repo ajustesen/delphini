@@ -1,10 +1,5 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 13 15:57:26 2017
-
-@author: anders
-"""
 
 from __future__ import print_function, with_statement, division
 import numpy as np
@@ -29,6 +24,7 @@ def read_TLE(TLEFILE):
         line2 = fp.readline().strip('\n')
     return name, line1, line2
 
+
 def create_kml(tlefile, startdate, enddate):
     '''
     Create a KML file with coordinates computed at 10 minute intervals
@@ -45,7 +41,7 @@ def create_kml(tlefile, startdate, enddate):
 
     # Read and parse TLE file
     name, line1, line2 = read_TLE(tlefile)
-    tle = ephem.readtle(name, line1, line2);
+    tle = ephem.readtle(name, line1, line2)
 
     # Aarhus coordinates
     Aarhus = ephem.Observer()
@@ -82,7 +78,7 @@ def create_kml(tlefile, startdate, enddate):
         <IconStyle>
             <Icon>
                 <scale>1.5</scale>
-                <href>misc/gomspace_nanoeye_thumb.png</href>
+                <href>../misc/gomspace_nanoeye_thumb.png</href>
             </Icon>
         </IconStyle>
         <LineStyle>

@@ -3,6 +3,8 @@
 
 from __future__ import print_function, with_statement, division
 import datetime
+import sys
+sys.path.append('../')
 import sattrack
 
 
@@ -15,7 +17,7 @@ import sattrack
 # The default startdate is now, default enddate is 24 hours later.
 
 # Modify these variables
-path_to_tlefile = 'ISS.TLE'
+path_to_tlefile = '../misc/ISS.TLE'
 path_to_kmlfile = 'ISS.KML'
 startdate = datetime.datetime.utcnow()
 enddate = startdate + datetime.timedelta(days=1)
