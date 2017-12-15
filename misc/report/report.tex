@@ -70,7 +70,8 @@ Optionally use the \texttt{--verbose} flag to display coordinates in the termina
 /* Load KML layer from URL or local path */
 new google.maps.KmlLayer({
   map: map,
-  url: 'https://www.google.com/maps/d/kml?mid=1919HD6uTNVHiKjLJFXtOXJqB00cuDFEe'
+  url: 'https://www.google.com/maps/d/kml?mid=1919HD6uTNVHiKjLJFXtOXJqB00cuDFEe',
+  preserveViewport: true
 });
 \end{verbatim}
 \noindent -- With \texttt{compute\_coordinates} running, simply open \texttt{SEV.html} in a web browser.
