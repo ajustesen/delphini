@@ -41,14 +41,17 @@ Make sure that `compute_coordinates` has execute permission.
 Start `compute_coordinates` with a TLE file in the terminal, e.g.:
  `./compute_coordinates ISS.TLE`. Optionally use the `--verbose` flag to display the coordinates in the terminal.
 
-With `compute_coordinates` running, simply open `SMV.html` in a web browser.
+With `compute_coordinates` running, simply open `SMV.html` in a web browser. It will look something like this (with an added orbit overlay):
 
+![SMV](misc/SMV.png)
 
-If you want to apply a different overlay on the map, change the `url` in `SMV.html` here:
+The default layer shows the ground station. If you want to apply a different overlay on the map, change the `url` in `SMV.html` here:
 
-``` /* Load KML layer from URL or local path */
+```
+/* Load KML layer from URL or local path */
   new google.maps.KmlLayer({
       map: map,
       url: 'https://www.google.com/maps/d/kml?mid=1919HD6uTNVHiKjLJFXtOXJqB00cuDFEe',
       preserveViewport: true
-    }); ```
+    });
+```
