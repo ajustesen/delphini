@@ -4,7 +4,7 @@ This repository contains routines written by Anders Bo Justesen for the Delphini
 
 SEV shows a continuously updated view of Earth as it appears when looking straight down from the satellite. SEV is built for Google Earth Pro using the KML format.
 
-SMV shows the satellite's current position on an interactive map. SMV is powered by Google Maps through the Google Maps Javascript API.
+SMV shows the satellite's current position on an interactive map. SMV is powered by Google Maps through the Google Maps Javascript API. Please be aware that SMV uses my personal Google API key. The key is currently unrestricted, so please don't abuse it! If you distribute this code or plan heavy use, please [get your own key](https://developers.google.com/maps/documentation/javascript/get-api-key) and change it in `SMV.html`.
 
 Both applications are based on orbital computations made with Python from the two-line element set.
 
@@ -48,7 +48,7 @@ With `compute_coordinates` running, simply open `SMV.html` in a web browser. It 
 The default layer shows the ground station. If you want to apply a different overlay on the map, change the `url` in `SMV.html` here:
 
 ```
-/* Load KML layer from URL or local path */
+/* Load KML layer from public URL */
   new google.maps.KmlLayer({
       map: map,
       url: 'https://www.google.com/maps/d/kml?mid=1919HD6uTNVHiKjLJFXtOXJqB00cuDFEe',
